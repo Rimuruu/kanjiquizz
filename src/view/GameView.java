@@ -17,7 +17,9 @@ public class GameView {
 	private HBox answerContainer;
 	private ArrayList<Button> answers; 
 	private Button next;
+	private Button menuButton;
 	private Text question;
+	private Text result;
 	private Game game;
 	
 	public void setView(BorderPane view){
@@ -44,9 +46,11 @@ public class GameView {
 			 b.getStyleClass().remove("bad_answer");
 			 b.setOnAction(e-> {
 				    	   Button btn = (Button) e.getSource();
-				    	   
+				    	   Question c = game.currentQuestion();
 				    	   if(curr.isAnswer(btn.getText())){
 				    		   btn.getStyleClass().add("good_answer");
+				    		   c.setStatut(true);
+				    		   game.incrScore();
 				    		   for(Button other : answers) {
 				    			   other.setDisable(true);
 				    			
@@ -72,6 +76,17 @@ public class GameView {
 	}
 	
 	
+	public void resultView() {
+		this.container.getChildren().clear();
+		this.result = new Text(this.game.getScore()+"/"+this.game.getNbQuestion());
+		this.container.getChildren().addAll(this.result,this.menuButton);
+	}
+	
+	
+	public Button getMenuButton() {
+		return this.menuButton;
+	}
+	
 	public GameView(Game game) {
 		
 		this.view = new BorderPane();
@@ -85,10 +100,13 @@ public class GameView {
 		}
 		this.next = new Button("Next");
 		this.next.setDisable(true);
+		this.menuButton = new Button("Back to menu");
 		this.next.setOnAction(e->{
-
-			this.game.incr();
-			loadQuestion();
+			if(this.game.getNbQuestion()-1 == this.game.getRound() ) resultView();
+			else {
+				this.game.incr();
+				loadQuestion();
+			}
 			
 		});
 		this.question = new Text();

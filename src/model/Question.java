@@ -8,6 +8,7 @@ public class Question {
 	private ArrayList<String> answers;
 	private String trueAnswer;
 	private String question;
+	private Boolean isRight = false;
 	
 	public ArrayList<String> getAnswers() {
 		return this.answers;
@@ -23,6 +24,10 @@ public class Question {
 	
 	public Boolean isAnswer(String guess) {
 		return guess.compareTo(trueAnswer) == 0;
+	}
+	
+	public void setStatut(Boolean x) {
+		this.isRight = true;
 	}
 	
 	

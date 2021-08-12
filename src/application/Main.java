@@ -1,5 +1,9 @@
 package application;
-	
+
+import java.io.IOException;
+
+import com.opencsv.exceptions.CsvValidationException;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -8,13 +12,29 @@ import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
 import model.Game;
 import model.Question;
+import model.KanjiLoader;
 import view.GameView;
 import view.Menu;
 
 import javafx.scene.Scene;
 
 
-public class Main extends Application {
+public class Main {
+	
+	public static void main(String[] args){
+		try {
+			KanjiLoader.loadKanji();
+		} catch (CsvValidationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		AppMain.launch( AppMain.class,args);
+	}
+
+	public static class AppMain extends Application {
 	private Menu menu;
 	private Menu menuMode;
 	private GameView gameView;
@@ -44,7 +64,6 @@ public class Main extends Application {
 	        JMetro jMetro = new JMetro(startingStyle);
 			
 			scene = new Scene(menu.getView(),800,600);
-			//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			jMetro.setScene(scene);
 			jMetro.getOverridingStylesheets().add(getClass().getResource("application.css").toExternalForm());			  
 			  
@@ -81,8 +100,7 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
+}
 	
-	public static void main(String[] args) {
-		launch(args);
-	}
+	
 }

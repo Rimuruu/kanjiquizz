@@ -6,8 +6,18 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFx"/>
-	<classpathentry kind="lib" path="C:/Users/Antoine/Documents/jmetro-11.6.15.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Antoine/eclipse-workspace/KanjiQuizz/lib/opencsv/opencsv-5.5.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Antoine/eclipse-workspace/KanjiQuizz/lib/jmetro/jmetro-11.6.15.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Antoine/eclipse-workspace/KanjiQuizz/lib/kuromoji/kuromoji-0.7.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Antoine/eclipse-workspace/KanjiQuizz/lib/opencsv/dep/commons-beanutils-1.9.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Antoine/eclipse-workspace/KanjiQuizz/lib/opencsv/dep/commons-collections4-4.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Antoine/eclipse-workspace/KanjiQuizz/lib/opencsv/dep/commons-lang3-3.12.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Antoine/eclipse-workspace/KanjiQuizz/lib/opencsv/dep/commons-text-1.9.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

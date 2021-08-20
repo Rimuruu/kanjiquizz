@@ -22,15 +22,7 @@ import javafx.scene.Scene;
 public class Main {
 	
 	public static void main(String[] args){
-		try {
-			KanjiLoader.loadKanji();
-		} catch (CsvValidationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		AppMain.launch( AppMain.class,args);
 	}
 
@@ -41,9 +33,7 @@ public class Main {
 	private Scene scene;
 	
 	public void createGame() {
-		Question a = new Question("salut","1","2","3","4");
-		Question b = new Question("salut","1","2","3","4");
-		Game game = new Game(a,b);
+		Game game = new Game();
 		gameView = new GameView(game);
 		gameView.getMenuButton().setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
@@ -96,6 +86,18 @@ public class Main {
 			
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			
+			try {
+				KanjiLoader.loadKanji();
+			} catch (CsvValidationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

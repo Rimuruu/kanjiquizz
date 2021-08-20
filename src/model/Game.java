@@ -1,6 +1,10 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Random;
 
 public class Game {
 	private ArrayList<Question> questions;
@@ -36,6 +40,46 @@ public class Game {
 	public void incr() {
 		if(round < nbQuestion-1) round++;
 	}
+	
+	
+	public Question randomQuestion(){
+		String q = null;
+		String a = null;
+		String[] d = {null,null,null};
+
+		Random rand = new Random();
+		HashMap<String,String> kanjiscopy = (HashMap<String, String>) KanjiLoader.kanjis.clone();
+		Iterator it =  kanjiscopy.entrySet().iterator();
+		int r = rand.nextInt(kanjiscopy.size());
+		for(int i = 0 ; i <  r ; i++) {
+	         Map.Entry pair = (Map.Entry)it.next();
+	         q = (String) pair.getKey();
+	         a = (String) pair.getValue();
+	         it.remove();
+	    }
+		for(int l = 0; l<4; l++) {
+			r = rand.nextInt(kanjiscopy.size());
+			for(int i = 0 ; i <  3 ; i++) {
+		         Map.Entry pair = (Map.Entry)it.next();
+		         d[i] = (String) pair.getValue();
+		         it.remove();
+		    }
+		}
+		
+		return new Question(q,a,d[0],d[1],d[2]);
+				
+	
+	}
+
+	public Game() {
+		this.questions = new ArrayList<Question>();
+		for(int i = 0; i<5;i++) {
+			this.questions.add(randomQuestion());
+		}
+		this.nbQuestion = this.questions.size();
+		
+	}
+	
 	
 	public Game(Question... questions) {
 		this.questions = new ArrayList<Question>();

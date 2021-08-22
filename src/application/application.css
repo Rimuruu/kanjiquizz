@@ -7,3 +7,15 @@
 .bad_answer {
     button_background_color: red;
 }
+
+.button{
+	-fx-font-size: 25px;
+}
+
+.question{
+	-fx-font-size: 50px;
+}
+
+.result{
+	-fx-font-size: 50px;
+}

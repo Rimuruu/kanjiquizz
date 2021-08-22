@@ -23,12 +23,9 @@ public class KanjiLoader{
 		CSVReader reader = new CSVReader(DATA);
 		String [] nextLine;
 	     while ((nextLine = reader.readNext()) != null) {
-	        // nextLine[] is an array of values from the line
-	        //System.out.println(nextLine[0] + nextLine[1] + nextLine[1] + "etc...");
 	        Tokenizer tokenizer = Tokenizer.builder().build();
 	        Token token = tokenizer.tokenize(nextLine[1]).get(0);
 	        String reading = token.getReading();
-	        //System.out.println(nextLine[1] + " = " + reading);
 	        if(reading != null) {
 	        	KanjiLoader.kanjis.put(nextLine[1],reading);
 	        }
@@ -37,9 +34,9 @@ public class KanjiLoader{
 	     Iterator it = kanjis.entrySet().iterator();
 	     while (it.hasNext()) {
 	         Map.Entry pair = (Map.Entry)it.next();
-	         System.out.println(pair.getKey() + " = " + pair.getValue());
-	         //it.remove(); // avoids a ConcurrentModificationException
+	        // System.out.println(pair.getKey() + " = " + pair.getValue());
+	      
 	}
-	     System.out.println(KanjiLoader.kanjis.size());
+	    // System.out.println(KanjiLoader.kanjis.size());
 	}
 }

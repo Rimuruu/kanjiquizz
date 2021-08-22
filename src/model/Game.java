@@ -6,6 +6,11 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 
+import org.atilika.kuromoji.Token;
+import org.atilika.kuromoji.Tokenizer;
+
+import fr.free.nrw.jakaroma.KanaToRomaji;
+
 public class Game {
 	private ArrayList<Question> questions;
 	private int nbQuestion;
@@ -42,11 +47,11 @@ public class Game {
 	}
 	
 	
-	public Question randomQuestion(){
+	public Question randomQuestion(GameMode gameMode){
 		String q = null;
 		String a = null;
 		String[] d = {null,null,null};
-
+		KanaToRomaji converter = new KanaToRomaji(); 
 		Random rand = new Random();
 		HashMap<String,String> kanjiscopy = (HashMap<String, String>) KanjiLoader.kanjis.clone();
 		Iterator it =  kanjiscopy.entrySet().iterator();
@@ -54,14 +59,28 @@ public class Game {
 		for(int i = 0 ; i <  r ; i++) {
 	         Map.Entry pair = (Map.Entry)it.next();
 	         q = (String) pair.getKey();
-	         a = (String) pair.getValue();
+	         if(gameMode == GameMode.KANA) {
+	        	 a = (String) pair.getValue();
+	         }
+	         else {
+	 
+	 	        a = converter.convert((String) pair.getValue());
+	         }
+	         
 	         it.remove();
 	    }
 		for(int l = 0; l<4; l++) {
 			r = rand.nextInt(kanjiscopy.size());
 			for(int i = 0 ; i <  3 ; i++) {
 		         Map.Entry pair = (Map.Entry)it.next();
-		         d[i] = (String) pair.getValue();
+		         if(gameMode == GameMode.KANA) {
+		        	 
+		        	 d[i] = (String) pair.getValue();
+		         }
+		         else {
+		        	
+		 	        d[i]= converter.convert((String) pair.getValue());
+		         }
 		         it.remove();
 		    }
 		}
@@ -71,10 +90,10 @@ public class Game {
 	
 	}
 
-	public Game() {
+	public Game(GameMode gameMode) {
 		this.questions = new ArrayList<Question>();
 		for(int i = 0; i<5;i++) {
-			this.questions.add(randomQuestion());
+			this.questions.add(randomQuestion(gameMode));
 		}
 		this.nbQuestion = this.questions.size();
 		

@@ -2,6 +2,8 @@ package view;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -79,6 +81,7 @@ public class GameView {
 	public void resultView() {
 		this.container.getChildren().clear();
 		this.result = new Text(this.game.getScore()+"/"+this.game.getNbQuestion());
+		this.result.getStyleClass().add("result");
 		this.container.getChildren().addAll(this.result,this.menuButton);
 	}
 	
@@ -92,6 +95,7 @@ public class GameView {
 		this.view = new BorderPane();
 		this.answerContainer = new HBox();
 		this.container = new VBox();
+		this.answerContainer.setPadding(new Insets(20,20,20,20));
 		this.answers = new ArrayList<Button>(
 			      Arrays.asList(new Button(""),new Button(""),new Button(""),new Button("")));
 		
@@ -100,6 +104,7 @@ public class GameView {
 		}
 		this.next = new Button("Next");
 		this.next.setDisable(true);
+		this.next.getStyleClass().add("button_next");
 		this.menuButton = new Button("Back to menu");
 		this.next.setOnAction(e->{
 			if(this.game.getNbQuestion()-1 == this.game.getRound() ) resultView();
@@ -115,6 +120,8 @@ public class GameView {
 		this.view.setCenter(this.container);
 		this.view.setPrefSize(800,400);
 		this.container.setAlignment(Pos.CENTER);
+		
+		this.question.getStyleClass().add("question");
 		this.answerContainer.setAlignment(Pos.CENTER);
 		loadQuestion();
 

@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
 import model.Game;
+import model.GameMode;
 import model.Question;
 import model.KanjiLoader;
 import view.GameView;
@@ -32,8 +33,8 @@ public class Main {
 	private GameView gameView;
 	private Scene scene;
 	
-	public void createGame() {
-		Game game = new Game();
+	public void createGame(GameMode gameMode) {
+		Game game = new Game(gameMode);
 		gameView = new GameView(game);
 		gameView.getMenuButton().setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
@@ -77,9 +78,16 @@ public class Main {
 			
 			menuMode.getButton("Romaji mode").setOnAction(new EventHandler<ActionEvent>() {
 			    @Override public void handle(ActionEvent e) {
-			       createGame();
+			       createGame(GameMode.ROMAJI);
 			    }
 			});
+			
+			menuMode.getButton("Kana mode").setOnAction(new EventHandler<ActionEvent>() {
+			    @Override public void handle(ActionEvent e) {
+			       createGame(GameMode.KANA);
+			    }
+			});
+			
 			scene.setRoot(this.menu.getView());  
 			
 

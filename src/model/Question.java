@@ -8,6 +8,7 @@ public class Question {
 	private ArrayList<String> answers;
 	private String trueAnswer;
 	private String question;
+	@SuppressWarnings("unused")
 	private Boolean isRight = false;
 	
 	public ArrayList<String> getAnswers() {

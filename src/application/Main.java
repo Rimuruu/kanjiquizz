@@ -1,8 +1,7 @@
 package application;
 
 import java.io.IOException;
-
-import com.opencsv.exceptions.CsvValidationException;
+import java.io.UnsupportedEncodingException;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -12,12 +11,14 @@ import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
 import model.Game;
 import model.GameMode;
-import model.Question;
 import model.KanjiLoader;
 import view.GameView;
 import view.Menu;
 
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 
 
 public class Main {
@@ -49,6 +50,7 @@ public class Main {
 	public void start(Stage primaryStage) {
 		try {
 			primaryStage.setTitle("KanjiQuizz");
+			primaryStage.getIcons().add(new Image(Main.class.getClassLoader().getResourceAsStream("kanjiquizz.png")));
 			menu = new Menu("Play","Quit");
 			menuMode = new Menu("Romaji mode","Kana mode","Back");
 			Style startingStyle = Style.LIGHT;
@@ -90,25 +92,45 @@ public class Main {
 			
 			scene.setRoot(this.menu.getView());  
 			
-
+			KanjiLoader.loadKanji();
+			
 			
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			
-			try {
-				KanjiLoader.loadKanji();
-			} catch (CsvValidationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			
 			
-		} catch(Exception e) {
+			
+			
+			
+		
+	} catch (UnsupportedEncodingException e) {
+		Alert errorAlert = new Alert(AlertType.ERROR);
+		errorAlert.setHeaderText("UnsupportedEncodingException");
+		errorAlert.setContentText(e.getMessage());
+		errorAlert.showAndWait();
+		e.printStackTrace();
+		e.printStackTrace();
+	
+	} catch (IOException e) {
+		Alert errorAlert = new Alert(AlertType.ERROR);
+		errorAlert.setHeaderText("File error");
+		errorAlert.setContentText(e.getMessage());
+		errorAlert.showAndWait();
+		e.printStackTrace();
+	
+	}
+		
+		catch(Exception e) {
+			Alert errorAlert = new Alert(AlertType.ERROR);
+			errorAlert.setHeaderText("Exception");
+			errorAlert.setContentText(e.getMessage());
+			errorAlert.showAndWait();
+			e.printStackTrace();
 			e.printStackTrace();
 		}
+		
+		 
 	}
 }
 	

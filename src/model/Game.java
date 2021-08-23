@@ -6,9 +6,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 
-import org.atilika.kuromoji.Token;
-import org.atilika.kuromoji.Tokenizer;
-
 import fr.free.nrw.jakaroma.KanaToRomaji;
 
 public class Game {
@@ -53,11 +50,14 @@ public class Game {
 		String[] d = {null,null,null};
 		KanaToRomaji converter = new KanaToRomaji(); 
 		Random rand = new Random();
+		@SuppressWarnings("unchecked")
 		HashMap<String,String> kanjiscopy = (HashMap<String, String>) KanjiLoader.kanjis.clone();
+		@SuppressWarnings("rawtypes")
 		Iterator it =  kanjiscopy.entrySet().iterator();
 		int r = rand.nextInt(kanjiscopy.size());
 		for(int i = 0 ; i <  r ; i++) {
-	         Map.Entry pair = (Map.Entry)it.next();
+	         @SuppressWarnings("rawtypes")
+			Map.Entry pair = (Map.Entry)it.next();
 	         q = (String) pair.getKey();
 	         if(gameMode == GameMode.KANA) {
 	        	 a = (String) pair.getValue();
@@ -72,7 +72,8 @@ public class Game {
 		for(int l = 0; l<4; l++) {
 			r = rand.nextInt(kanjiscopy.size());
 			for(int i = 0 ; i <  3 ; i++) {
-		         Map.Entry pair = (Map.Entry)it.next();
+		         @SuppressWarnings("rawtypes")
+				Map.Entry pair = (Map.Entry)it.next();
 		         if(gameMode == GameMode.KANA) {
 		        	 
 		        	 d[i] = (String) pair.getValue();
